@@ -42,6 +42,7 @@
     wl-clipboard
 
     audacity
+    ardour
 
     # -- Office / Writing
     obsidian libreoffice-qt6 texstudio texliveFull
