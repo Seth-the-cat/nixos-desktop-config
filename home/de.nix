@@ -28,6 +28,9 @@
   };
 
   # Drop in your hyprland.lua as a managed file
-  xdg.configFile."hypr/hyprland.lua".source = ./hyprland.lua;
+  xdg.configFile."hypr/hyprland.lua" = {
+    source = ./hyprland.lua;
+    force = true;
+  };
 }
 

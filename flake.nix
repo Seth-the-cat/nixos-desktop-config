@@ -28,9 +28,8 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };  # <-- this is what makes inputs available in hardware.nix
       modules = [
-         ./hardware.nix
-         ./configuration.nix
-         ...
+         ./nixos/hardware-configuration.nix
+         ./nixos/configuration.nix
       ];
     };
     homeConfigurations."seththecat@seththecat" = home-manager.lib.homeManagerConfiguration {

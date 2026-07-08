@@ -1,7 +1,7 @@
 ---@module 'hl'
 
 local terminal = "kitty"
-local fileManager = "dolphin"
+local fileManager = "yazi"
 local ipc = "noctalia msg"
 local mainMod = "SUPER"
 
@@ -14,6 +14,13 @@ hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
+    scale    = 1,
+})
+hl.monitor({
+    output   = "DP-3",
+    mode     = "preferred",
+    position = "auto",
+    transform= 1,
     scale    = 1,
 })
 
@@ -146,6 +153,55 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd(ipc .. " media previous"), { locked = 
 hl.bind("Print",       hl.dsp.exec_cmd(ipc .. " screenshot-region"))
 hl.bind("SHIFT+Print", hl.dsp.exec_cmd(ipc .. " screenshot-fullscreen"))
 hl.bind(mainMod .. "+Print", hl.dsp.exec_cmd(ipc .. " screenshot-fullscreen all"))
+
+-- Replay buffer
+hl.bind("Control_L" .. " + " .. "R", function()
+    local obs_class = "com.obsproject.Studio"
+    local obs_is_open = false
+
+    -- 1. Grab all open client windows across your session
+    local clients = hl.get_windows()
+    -- 2. Loop through open windows to check if OBS exists
+    for _, client in ipairs(clients) do
+        if client.class == obs_class then
+            obs_is_open = true
+            break
+        end
+    end
+
+    -- 3. Execute conditional logic
+    if obs_is_open then
+        -- If OBS is open anywhere, pass the hardware keys directly to it
+        hl.dispatch(hl.dsp.pass({ window = "class:^" .. obs_class .. "$" }))
+    else
+        -- Fallback: Trigger your screen recorder plugin command if OBS is closed
+        hl.dispatch(hl.dsp.exec_cmd(ipc .. " plugin noctalia/screen_recorder:service all replay-save"))
+    end
+end, { description = "Global OBS check for replay-save or passthrough" })
+
+hl.bind("ALT" .. " + " .. "Control_L" .. " + " .. "R", function()
+    local obs_class = "com.obsproject.Studio"
+    local obs_is_open = false
+
+    -- 1. Grab all open client windows across your session
+    local clients = hl.get_windows()
+    -- 2. Loop through open windows to check if OBS exists
+    for _, client in ipairs(clients) do
+        if client.class == obs_class then
+            obs_is_open = true
+            break
+        end
+    end
+
+    -- 3. Execute conditional logic
+    if obs_is_open then
+        -- If OBS is open anywhere, pass the hardware keys directly to it
+        hl.dispatch(hl.dsp.pass({ window = "class:^" .. obs_class .. "$" }))
+    else
+        -- Fallback: Trigger your screen recorder plugin command if OBS is closed
+        hl.dispatch(hl.dsp.exec_cmd(ipc .. " plugin noctalia/screen_recorder:service all replay-toggle"))
+    end
+end, { description = "Global OBS check for replay-toggle or passthrough" })
 
 --#############################
 --## WINDOWS AND WORKSPACES ###

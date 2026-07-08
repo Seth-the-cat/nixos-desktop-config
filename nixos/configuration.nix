@@ -1,17 +1,19 @@
 { config, pkgs, inputs, ... }:
-
 {
-  imports = [];
+  imports = [ inputs.aagl.nixosModules.default ];
 
   # Nix settings
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
     trusted-users = [ "@wheel" ];
-    # Noctalia binary cache
-    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-substituters = [
+      "https://noctalia.cachix.org"
+      "https://ezkea.cachix.org"
+    ];
     extra-trusted-public-keys = [
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
     ];
   };
 
@@ -43,6 +45,11 @@
     pulse.enable = true;
     jack.enable = true;
   };
+  security.pam.loginLimits = [
+    { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+    { domain = "@audio"; item = "rtprio"; type = "-"; value = "99"; }
+    { domain = "@audio"; item = "nice"; type = "-"; value = "-19"; }
+  ];
 
   # Hyprland
   programs.hyprland = {
@@ -55,7 +62,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         user = "greeter";
       };
     };
@@ -71,7 +78,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   # System packages (minimal — most goes in home.nix)
@@ -86,9 +93,15 @@
   users.users.seththecat = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" ];
-    shell = pkgs.zsh;  # was bash
+    shell = pkgs.zsh;
   };
+  programs.zsh.enable = true;
 
-  programs.zsh.enable = true; 
+  programs.honkers-railway-launcher.enable = true;
+
+  services.sshd.enable = true;
+  services.tailscale.enable = true;
+  services.cloudflare-warp.enable = true;
+
   system.stateVersion = "26.05";
 }
