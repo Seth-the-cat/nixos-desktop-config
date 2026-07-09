@@ -98,6 +98,7 @@
   programs.zsh.enable = true;
 
   programs.honkers-railway-launcher.enable = true;
+  programs.obs-studio.enableVirtualCamera = true;
 
   services.sshd.enable = true;
   services.tailscale.enable = true;
