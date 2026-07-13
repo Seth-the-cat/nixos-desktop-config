@@ -39,6 +39,8 @@
     prismlauncher
     kdePackages.kdenlive
 
+    supercell-wx
+
     wl-clipboard
 
     audacity
@@ -86,10 +88,12 @@
     speedtest-cli
     dig           # DNS lookup
 
-    # Media
+    # Media / Image
     ffmpeg
     imagemagick
     mpv           # lightweight video player
+    inkscape
+    krita
 
     # Misc
     jq            # JSON processor
@@ -100,6 +104,10 @@
     wl-clipboard  # wayland clipboard CLI (wl-copy/wl-paste)
     xdg-utils     # xdg-open etc
     file          # identify file types
+    jre
+
+    # Code
+    vscode ollama-cuda
 
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     gpu-screen-recorder
@@ -118,7 +126,11 @@
     ];
   };
 
-  
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+
   services.ssh-agent.enable = true;
 
   services = {

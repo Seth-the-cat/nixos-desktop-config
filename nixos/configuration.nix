@@ -51,6 +51,8 @@
     { domain = "@audio"; item = "nice"; type = "-"; value = "-19"; }
   ];
 
+  security.polkit.enable = true;
+
   # Hyprland
   programs.hyprland = {
     enable = true;
@@ -98,7 +100,10 @@
   programs.zsh.enable = true;
 
   programs.honkers-railway-launcher.enable = true;
-  programs.obs-studio.enableVirtualCamera = true;
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+  };
 
   services.sshd.enable = true;
   services.tailscale.enable = true;
