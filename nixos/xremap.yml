@@ -1,0 +1,17 @@
+keymap:
+  - name: "OBS macro pad"
+    device:
+      only: "Dell Dell USB Keyboard"
+    remap:
+      KEY_UP:
+        launch: ["/home/seththecat/Scripts/scene-cycle.sh", "prev"]
+      KEY_DOWN:
+        launch: ["/home/seththecat/Scripts/scene-cycle.sh", "next"]
+      KEY_S:
+        launch: ["/nix/store/mi3rnj81243b0dw7v024g8726zhgw845-obs-cmd-1.0.0/bin/obs-cmd", "-w", "obsws://localhost:4455/vFsIHP1gEEe0mGtf", "stream", "toggle"]
+      KEY_R:
+        launch: ["/nix/store/mi3rnj81243b0dw7v024g8726zhgw845-obs-cmd-1.0.0/bin/obs-cmd", "-w", "obsws://localhost:4455/vFsIHP1gEEe0mGtf", "record", "toggle"]
+      KEY_C:
+        launch: ["/home/seththecat/.nix-profile/bin/obs-cmd", "-w", "obsws://localhost:4455/bWjxvLEZNTnomG4C", "source", "mute", "--toggle", "Mic/Aux"]
+      KEY_B:
+        launch: ["/home/seththecat/.nix-profile/bin/obs-cmd", "-w", "obsws://localhost:4455/bWjxvLEZNTnomG4C", "scene", "switch", "BRB"]

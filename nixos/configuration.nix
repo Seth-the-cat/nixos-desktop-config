@@ -27,6 +27,9 @@
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # Set console keyboard to dvorak
+  console.keyMap = "dvorak";
+
   # Networking
   networking.hostName = "seththecat";
   networking.networkmanager.enable = true;
@@ -108,6 +111,17 @@
   services.sshd.enable = true;
   services.tailscale.enable = true;
   services.cloudflare-warp.enable = true;
+
+  services.xremap = {
+    enable = true;
+    withHypr = true;
+    userName = "seththecat";
+    yamlConfig = builtins.readFile ./xremap.yml;
+  };
+
+  systemd.services.xremap.serviceConfig.BindReadOnlyPaths = [
+    "/home/seththecat/Scripts"
+  ];
 
   system.stateVersion = "26.05";
 }

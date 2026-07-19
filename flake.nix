@@ -11,10 +11,7 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #snekstudio = {
-      #url = "github:the-furry-hubofeverything/SnekStudio/nix-flake";
-      # flake = true;
-    #};
+    xremap-flake.url = "github:xremap/nix-flake";
 
     # ADD THIS
     home-manager = {
@@ -22,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nix-cachyos-kernel, aagl, noctalia, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nix-cachyos-kernel, xremap-flake, aagl, noctalia, home-manager, ... }@inputs:
   {
     nixosConfigurations.seththecat = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -30,6 +27,7 @@
       modules = [
          ./nixos/hardware-configuration.nix
          ./nixos/configuration.nix
+         xremap-flake.nixosModules.default
       ];
     };
     homeConfigurations."seththecat@seththecat" = home-manager.lib.homeManagerConfiguration {

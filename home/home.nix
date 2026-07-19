@@ -29,6 +29,8 @@
   };
 
   home.packages = with pkgs; [
+    obs-cmd
+
     kitty
     kdePackages.dolphin
     thunderbird
@@ -135,5 +137,9 @@
 
   services = {
     syncthing.enable = true;
+  };
+
+  systemd.user.sessionVariables = {
+    LD_LIBRARY_PATH = "/run/opengl-driver/lib";
   };
 }
