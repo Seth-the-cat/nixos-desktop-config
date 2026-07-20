@@ -92,12 +92,13 @@
     wget
     curl
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    openrgb-with-all-plugins
   ];
 
   # User
   users.users.seththecat = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input"  "i2c" "plugdev"  ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
@@ -122,6 +123,8 @@
   systemd.services.xremap.serviceConfig.BindReadOnlyPaths = [
     "/home/seththecat/Scripts"
   ];
+
+  services.hardware.openrgb.enable = true;
 
   system.stateVersion = "26.05";
 }

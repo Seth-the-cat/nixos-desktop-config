@@ -60,9 +60,12 @@
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
     "split_lock_detect=off"
+    "acpi_enforce_resources=lax"
   ];
 
   boot.blacklistedKernelModules = [ "nouveau" ];
+
+  boot.kernelModules = [ "i2c-dev" ];
 
   # NVIDIA RTX 4060
   services.xserver.videoDrivers = [ "nvidia" ];
