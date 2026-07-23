@@ -25,9 +25,10 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };  # <-- this is what makes inputs available in hardware.nix
       modules = [
-         ./nixos/hardware-configuration.nix
-         ./nixos/configuration.nix
-         xremap-flake.nixosModules.default
+        ./nixos/hardware-configuration.nix
+        ./nixos/configuration.nix
+        ./nixos/noctalia_drive_plugin.nix
+        xremap-flake.nixosModules.default
       ];
     };
     homeConfigurations."seththecat@seththecat" = home-manager.lib.homeManagerConfiguration {
