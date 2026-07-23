@@ -36,6 +36,9 @@
     thunderbird
     keepassxc
     syncthing
+
+    scrcpy
+
     nextcloud-client
     steam
     prismlauncher

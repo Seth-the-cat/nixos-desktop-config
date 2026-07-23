@@ -43,6 +43,24 @@
     options = [ "subvol=@nextcloud" "compress=zstd" "noatime" ];
   };
 
+  fileSystems."/home/seththecat/Video/Desktop Clips" = {
+    device = "/dev/disk/by-label/VideoClips";
+    fsType = "btrfs";
+    options = [ "subvol=@desktopclips" "noatime" "compress=zstd:1" "space_cache=v2" ];
+  };
+
+  fileSystems."/home/seththecat/Video/Laptop Clips" = {
+    device = "/dev/disk/by-label/VideoClips";
+    fsType = "btrfs";
+    options = [ "subvol=@laptopclips" "noatime" "compress=zstd:1" "space_cache=v2" ];
+  };
+
+  fileSystems."/home/seththecat/Video/Renders" = {
+    device = "/dev/disk/by-label/VideoClips";
+    fsType = "btrfs";
+    options = [ "subvol=@renders" "noatime" "compress=zstd:1" "space_cache=v2" ];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/087A-B78F";
     fsType = "vfat";

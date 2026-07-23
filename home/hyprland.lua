@@ -11,15 +11,21 @@ local mainMod = "SUPER"
 
 -- Single monitor fallback — update output name once you know it (e.g. "DP-1")
 hl.monitor({
-    output   = "",
+    output   = "DP-1",
     mode     = "preferred",
-    position = "auto",
+    position = "120x-1200",
+    scale    = 1,
+})
+hl.monitor({
+    output   = "DP-2",
+    mode     = "preferred",
+    position = "0x0",
     scale    = 1,
 })
 hl.monitor({
     output   = "DP-3",
     mode     = "preferred",
-    position = "auto",
+    position = "2560x70",
     transform= 1,
     scale    = 1,
 })

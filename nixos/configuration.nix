@@ -93,12 +93,13 @@
     curl
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     openrgb-with-all-plugins
+    android-tools
   ];
 
   # User
   users.users.seththecat = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input"  "i2c" "plugdev"  ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input"  "i2c" "plugdev" ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
